@@ -131,7 +131,9 @@ app.post("/delete-session", isAuthenticated, async (req, res) => {
     // Ensure session_id is parsed correctly as an integer
     const sessionIdInt = parseInt(session_id);
 
-    // Delete session from sessions table
+    // Delete related records in session_players table
+    await pool.query("DELETE FROM session_players WHERE session_id = $1", [sessionIdInt]);
+
     await pool.query("DELETE FROM sessions WHERE id = $1", [sessionIdInt]);
 
     // Redirect to admin dashboard after successful deletion
