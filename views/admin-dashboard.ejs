@@ -48,22 +48,23 @@
                 Cancelled: <%= session.cancellation_reason %>
               </div>
               <% } %>
-              <form action="/delete-session" method="POST">
-                <input
-                  type="hidden"
-                  name="session_id"
-                  value="<%= session.id %>"
-                />
-                <button type="submit">Delete</button>
-                <form action="/join-session" method="POST">
-                  <input
-                    type="hidden"
-                    name="session_id"
-                    value="<%= session.id %>"
-                  />
-                  <button type="submit">Join</button>
+                <form action="/delete-session" method="POST" style="display:inline;">
+                    <input
+                      type="hidden"
+                      name="session_id"
+                      value="<%= session.id %>"
+                    />
+                    <button type="submit">Delete</button>
                 </form>
-              </form>
+                <form action="/join-session" method="POST" style="display:inline;">
+                    <input
+                      type="hidden"
+                      name="session_id"
+                      value="<%= session.id %>"
+                    />
+                    <input type="hidden" name="admin_name" value="<%= user.name %>" />
+                    <button type="submit">Join</button>
+                </form>
             </li>
             <% }) %>
           </ul>
