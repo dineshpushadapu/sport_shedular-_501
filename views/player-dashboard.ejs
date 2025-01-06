@@ -3,111 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <title>Player Dashboard</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body id="player-dashboard">
-    <header>
-      <h1>Welcome, <%= user.name %></h1>
+  <body id="player-dashboard" class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 shadow-md">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Player Dashboard</h1>
+        <nav class="flex space-x-6">
+          <a href="/" class="hover:underline">Home</a>
+          <a href="/reports" class="hover:underline">Reports</a>
+          <a href="/change-password" class="hover:underline">Change Password</a>
+          <a href="/logout" class="hover:underline text-red-300">Logout</a>
+        </nav>
+      </div>
     </header>
-    <div class="container">
-      <div class="dashboard">
-        <div class="logout">
-          <a href="/logout">Logout</a>
-          <a href="/change-password">Change Password</a>
+
+    <!-- Main Content -->
+   
+    <main class="container mx-auto mt-8 px-6">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Welcome, <%= user.name %></h2>
+      <div class="bg-white p-6 rounded-md shadow-lg">
+        <div class="flex justify-end space-x-6 mb-6">
+          <!-- Logout and Change Password Links -->
         </div>
 
-        <!-- Joined Sessions -->
-        <h2>Joined Sessions</h2>
-        <ul>
+        <!-- Joined Sessions Section -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Joined Sessions</h2>
+        <ul class="space-y-4">
           <% joinedSessions.forEach(session => { %>
-          <li>
-            Sport: <%= session.sport_name %>, Teams: <%= session.team1 %> vs <%=
-            session.team2 %>, Date: <%= session.date %>, Venue: <%=
-            session.venue %>
-            <br />Players:
-            <ul>
-              <% session.players.forEach(player => { %>
-              <li>
-                <%= player.name %> <% if (player.id === user.id) { %>(You)<% }
-                %>
-              </li>
-              <% }) %>
-            </ul>
-            <% if (session.cancelled) { %>
-            <div class="cancelled">
-              Cancelled: <%= session.cancellation_reason %>
-            </div>
-            <% } %>
-          </li>
-          <% }) %>
-        </ul>
-
-        <!-- Available Sessions -->
-        <h2>Available Sessions</h2>
-        <ul>
-          <% sessions.forEach(session => { %>
-          <li>
-            Sport: <%= session.sport_name %>, Teams: <%= session.team1 %> vs <%=
-            session.team2 %>, Date: <%= session.date %>, Venue: <%=
-            session.venue %>
-            <br />Players:
-            <ul>
-              <% session.players.forEach(player => { %>
-              <li>
-                <%= player.name %> <% if (player.id === user.id) { %>(You)<% }
-                %>
-              </li>
-              <% }) %>
-            </ul>
-            <% if (session.creator_id === user.id) { %>
-              <div style="font-style: italic; color: rgb(6, 5, 5);">(Created by you)</div>
+            <li class="bg-gradient-to-r from-green-400 to-orange-500 p-6 rounded-md shadow-lg">
+              <p class="font-bold">Sport: <%= session.sport_name %></p>
+              <p>Teams: <%= session.team1 %> vs <%= session.team2 %></p>
+              <p>Date: <%= session.date %></p>
+              <p>Venue: <%= session.venue %></p>
+              <p>Players:</p>
+              <ul class="list-disc pl-6">
+                <% session.players.forEach(player => { %>
+                  <li><%= player.name %> <% if (player.id === user.id) { %>(You)<% } %></li>
+                <% }) %>
+              </ul>
+              <% if (session.cancelled) { %>
+                <div class="text-red-500 mt-2">
+                  Cancelled: <%= session.cancellation_reason %>
+                </div>
               <% } %>
-              
-            <% if (session.creator_id !== user.id && !session.cancelled) { %>
-            <form action="/join-session" method="POST">
-              <input
-                type="hidden"
-                name="session_id"
-                value="<%= session.id %>"
-              />
-              <button type="submit">Join</button>
-            </form>
-            <% } else { %> <% } %> <% if (session.cancelled) { %>
-            <div class="cancelled">
-              Cancelled: <%= session.cancellation_reason %>
-            </div>
-            <% } %>
-          </li>
+            </li>
           <% }) %>
         </ul>
 
-        <!-- Create a New Session -->
-        <h2>Create Session</h2>
+        <!-- Available Sessions Section -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Available Sessions</h2>
+        <ul class="space-y-4">
+          <% sessions.forEach(session => { %>
+            <li class="bg-gradient-to-r from-green-400 to-orange-500 p-6 rounded-md shadow-lg">
+              <p class="font-bold">Sport: <%= session.sport_name %></p>
+              <p>Teams: <%= session.team1 %> vs <%= session.team2 %></p>
+              <p>Date: <%= session.date %></p>
+              <p>Venue: <%= session.venue %></p>
+              <p>Players:</p>
+              <ul class="list-disc pl-6">
+                <% session.players.forEach(player => { %>
+                  <li><%= player.name %> <% if (player.id === user.id) { %>(You)<% } %></li>
+                <% }) %>
+              </ul>
+              <% if (session.creator_id === user.id) { %>
+                <div class="italic text-gray-600">(Created by you)</div>
+              <% } %>
+              <% if (session.creator_id !== user.id && !session.cancelled) { %>
+                <form action="/join-session" method="POST" class="mt-2">
+                  <input type="hidden" name="session_id" value="<%= session.id %>" />
+                  <button type="submit" class="text-blue-500 hover:text-blue-700">Join</button>
+                </form>
+              <% } %>
+              <% if (session.cancelled) { %>
+                <div class="text-red-500 mt-2">
+                  Cancelled: <%= session.cancellation_reason %>
+                </div>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+
+        <!-- Create New Session Section -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Create Session</h2>
         <form action="/create-session" method="POST">
-          <label for="sport_id">Sport:</label>
-          <select name="sport_id" id="sport_id" required>
-            <% sports.forEach(sport => { %>
-            <option value="<%= sport.id %>"><%= sport.name %></option>
-            <% }) %>
-          </select>
-          <label for="team1">Team 1:</label>
-          <input type="text" name="team1" id="team1" required />
-          <label for="team2">Team 2:</label>
-          <input type="text" name="team2" id="team2" required />
-          <label for="additional_players">Additional Players:</label>
-          <input
-            type="number"
-            name="additional_players"
-            id="additional_players"
-            required
-          />
-          <label for="date">Date:</label>
-          <input type="datetime-local" name="date" id="date" required />
-          <label for="venue">Venue:</label>
-          <input type="text" name="venue" id="venue" required />
-          <button type="submit">Create Session</button>
+          <div class="bg-gradient-to-r from-blue-400 to-purple-500 p-6 rounded-md shadow-lg">
+            <div>
+              <label for="sport_id" class="block text-gray-700">Sport:</label>
+              <select name="sport_id" id="sport_id" class="w-full border border-gray-300 rounded px-4 py-2" required>
+                <% sports.forEach(sport => { %>
+                  <option value="<%= sport.id %>"><%= sport.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div>
+              <label for="team1" class="block text-gray-700">Team 1:</label>
+              <input type="text" name="team1" id="team1" class="w-full border border-gray-300 rounded px-4 py-2" required />
+            </div>
+            <div>
+              <label for="team2" class="block text-gray-700">Team 2:</label>
+              <input type="text" name="team2" id="team2" class="w-full border border-gray-300 rounded px-4 py-2" required />
+            </div>
+            <div>
+              <label for="additional_players" class="block text-gray-700">Additional Players:</label>
+              <input type="number" name="additional_players" id="additional_players" class="w-full border border-gray-300 rounded px-4 py-2" required />
+            </div>
+            <div>
+              <label for="date" class="block text-gray-700">Date:</label>
+              <input type="datetime-local" name="date" id="date" class="w-full border border-gray-300 rounded px-4 py-2" required />
+            </div>
+            <div>
+              <label for="venue" class="block text-gray-700">Venue:</label>
+              <input type="text" name="venue" id="venue" class="w-full border border-gray-300 rounded px-4 py-2" required />
+            </div>
+          </div>
+          <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded mt-4 hover:bg-blue-600">Create Session</button>
         </form>
       </div>
-    </div>
+    
   </body>
 </html>
