@@ -119,6 +119,7 @@ app.post("/create-sport", isAuthenticated, async (req, res) => {
   await pool.query("INSERT INTO sports (name) VALUES ($1)", [name]);
   res.redirect("/admin-dashboard");
 });
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
@@ -143,6 +144,7 @@ app.post("/delete-session", isAuthenticated, async (req, res) => {
     res.status(500).send("Error deleting session");
   }
 });
+
 app.get("/player-dashboard", isAuthenticated, async (req, res) => {
   const user_id = req.session.user.id;
   const sessions = await pool.query(`
@@ -233,6 +235,7 @@ app.post("/create-session", isAuthenticated, async (req, res) => {
     );
   }
 });
+
 app.post(
   "/join-session",
   isAuthenticated,
@@ -287,6 +290,30 @@ app.post("/cancel-session", isAuthenticated, async (req, res) => {
   res.redirect(
     req.session.user.role === "admin" ? "/admin-dashboard" : "/player-dashboard"
   );
+});
+
+app.post("/delete-sport", isAuthenticated, async (req, res) => {
+  try {
+    const { sport_id } = req.body;
+
+    // Ensure sport_id is parsed correctly as an integer
+    const sportIdInt = parseInt(sport_id);
+
+    // Step 1: Delete related records in session_players table
+    await pool.query("DELETE FROM session_players WHERE session_id IN (SELECT id FROM sessions WHERE sport_id = $1)", [sportIdInt]);
+
+    // Step 2: Delete related sessions
+    await pool.query("DELETE FROM sessions WHERE sport_id = $1", [sportIdInt]);
+
+    // Step 3: Now delete the sport
+    await pool.query("DELETE FROM sports WHERE id = $1", [sportIdInt]);
+
+    // Redirect to admin dashboard after successful deletion
+    res.redirect("/admin-dashboard");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting sport");
+  }
 });
 
 app.get("/change-password", isAuthenticated, (req, res) => {
