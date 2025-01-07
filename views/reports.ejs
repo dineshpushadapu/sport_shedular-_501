@@ -3,51 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <title>Reports</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body id="reports-page">
-    <header>
-      <h1>Reports</h1>
+  <body id="reports-page" class="bg-gray-300">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-orange-500 to-purple-600 text-black py-4 px-6 shadow-md">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Reports</h1>
+        <nav class="flex space-x-6">
+          <a href="/" class="hover:underline">Home</a>
+          <a href="/player-dashboard" class="hover:underline">Player Dashboard</a>
+          <a href="/change-password" class="hover:underline">Change Password</a>
+          <a href="/logout" class="hover:underline text-red-300">Logout</a>
+        </nav>
+      </div>
     </header>
-    <div class="container">
-      <h2>Session Details</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Sport</th>
-            <th>Teams</th>
-            <th>Date</th>
-            <th>Venue</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% sessions.forEach(session => { %>
-          <tr>
-            <td><%= session.sport_name %></td>
-            <td><%= session.team1 %> vs <%= session.team2 %></td>
-            <td><%= session.date %></td>
-            <td><%= session.venue %></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
-      <h2>Sport Popularity</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Sport</th>
-            <th>Number of Sessions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% popularity.forEach(sport => { %>
-          <tr>
-            <td><%= sport.name %></td>
-            <td><%= sport.count %></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-8 px-6">
+      <div class="bg-white p-6 rounded-md shadow-lg">
+        <!-- Session Details -->
+        <h2 class="text-2xl font-bold text-black-800 mb-4">Session Details</h2>
+        <table class="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-200 text-orange-700">
+              <th class="border border-gray-300 px-4 py-2 text-left">Sport</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Teams</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Date</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Venue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% sessions.forEach(session => { %>
+            <tr class="hover:bg-blue-400">
+              <td class="border border-gray-300 px-4 py-2"><%= session.sport_name %></td>
+              <td class="border border-gray-300 px-4 py-2">
+                <%= session.team1 %> vs <%= session.team2 %>
+              </td>
+              <td class="border border-black-300 px-4 py-2"><%= session.date %></td>
+              <td class="border border-black-300 px-4 py-2"><%= session.venue %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+
+        <!-- Sport Popularity -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Sport Popularity</h2>
+        <table class="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-200 text-green-700">
+              <th class="border border-gray-300 px-4 py-2 text-left">Sport</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Number of Sessions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% popularity.forEach(sport => { %>
+            <tr class="hover:bg-gradient-to-r from-orange-500 to-purple-600-100">
+              <td class="border border-gray-300 px-4 py-2"><%= sport.name %></td>
+              <td class="border border-gray-300 px-4 py-2"><%= sport.count %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

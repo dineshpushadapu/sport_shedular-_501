@@ -1,275 +1,118 @@
-<!-- home.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Home</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
-        background-image: url("/images/login.jpg");
-        background-size: cover;
-        background-position: center;
-      }
-
-      .container {
-        width: 85%;
-        margin: 0 auto;
-        background-color: #cd3a9a; 
-        box-shadow: 0 0 10px rgba(29, 25, 25, 0.1);
-        border-radius: 8px;
-        padding: 20px;
-      }
-
-      /* Navbar Styles */
-      .navbar {
-        background-color: #333;
-        color: white;
-        padding: 10px 0;
-      }
-
-      .navbar ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        text-align: right;
-      }
-
-      .navbar ul li {
-        display: inline-block;
-        margin-right: 20px;
-      }
-
-      .navbar ul li a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s ease;
-      }
-
-      .navbar ul li a:hover {
-        color: yellow;
-      }
-
-      /* Main Section Styles */
-      .main-section {
-        background-color: #fff;
-        padding: 40px;
-        margin-top: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-      }
-
-      .main-section h1 {
-        font-size: 2.5rem;
-        color: #333;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .main-section p {
-        font-size: 1.1rem;
-        color: #666;
-        line-height: 1.6;
-        text-align: center;
-        margin-bottom: 40px;
-      }
-
-      /* Features List Styles */
-      .features-list {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px 0;
-        list-style-type: none;
-      }
-
-      .features-list li {
-        flex: 1;
-        background-color: #f9f9f9;
-        padding: 20px;
-        margin: 0 10px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
-
-      .features-list h2 {
-        font-size: 1.5rem;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      .features-list p {
-        font-size: 1rem;
-        color: #666;
-        line-height: 1.4;
-      }
-
-      /* Feedback Section Styles */
-      .feedback-section {
-        background-color: #e0e0e0;
-        padding: 40px 20px;
-        margin-top: 40px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .feedback-section h2 {
-        font-size: 2rem;
-        color: #333;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .feedback-form {
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .feedback-form label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 10px;
-      }
-
-      .feedback-form input,
-      .feedback-form textarea {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 1rem;
-      }
-
-      .feedback-form textarea {
-        resize: vertical;
-        min-height: 100px;
-      }
-
-      .feedback-form button {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
-      }
-
-      .feedback-form button:hover {
-        background-color: #555;
-      }
-
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        .container {
-          width: 90%;
-        }
-
-        .features-list {
-          flex-direction: column;
-        }
-
-        .features-list li {
-          margin: 10px 0;
-        }
-      }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <nav class="navbar">
-      <div class="container">
-        <ul>
-          <li><a href="/register">Register</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/about-us">About Us</a></li>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 text-gray-900 py-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center px-6">
+        <h1 class="text-4xl font-extrabold">Sports Management System</h1>
+        <ul class="flex space-x-8">
+          <li><a href="/register" class="hover:text-indigo-700">Register</a></li>
+          <li><a href="/login" class="hover:text-indigo-700">Login</a></li>
+          <li><a href="/about-us" class="hover:text-indigo-700">About Us</a></li>
         </ul>
       </div>
     </nav>
 
-    <div class="container">
-      <div class="main-section">
-        <h1>Sports Management System</h1>
-        <p>
-          Welcome to our sports management platform designed to enhance your
-          sports experience.
+    <!-- Main Section -->
+    <div class="container mx-auto mt-12 px-6">
+      <div class="bg-white p-10 rounded-lg shadow-lg border-t-4 border-blue-400">
+        <h1 class="text-5xl font-bold text-center text-indigo-600 mb-8">
+          Welcome to Sports Management
+        </h1>
+        <p class="text-lg text-gray-700 text-center mb-10">
+          Your one-stop platform to organize, manage, and enhance your sports experience.
         </p>
 
-        <ul class="features-list">
-          <li>
-            <h2>Team Management</h2>
+        <!-- Features List -->
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <li class="bg-gradient-to-br from-blue-200 to-green-200 text-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-2xl font-bold mb-4">Team Management</h2>
             <p>
-              Create and manage teams for various sports activities. Assign
-              players, update team details, and view team statistics.
+              Create and manage teams for various sports activities. Assign players, update team
+              details, and view team statistics.
             </p>
           </li>
-          <li>
-            <h2>Schedule Management</h2>
+          <li class="bg-gradient-to-br from-red-200 to-yellow-200 text-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-2xl font-bold mb-4">Schedule Management</h2>
             <p>
-              View and manage upcoming sports events, matches, and sessions.
-              Filter by sport, date, and venue.
+              View and manage upcoming sports events, matches, and sessions. Filter by sport, date,
+              and venue.
             </p>
           </li>
-          <li>
-            <h2>Player Registration</h2>
+          <li class="bg-gradient-to-br from-purple-200 to-pink-200 text-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-2xl font-bold mb-4">Player Registration</h2>
             <p>
-              Players can register, update their profiles, and manage their
-              participation in sports events.
+              Players can register, update their profiles, and manage their participation in sports
+              events.
             </p>
           </li>
-          <li>
-            <h2>Statistics and Reports</h2>
+          <li class="bg-gradient-to-br from-yellow-200 to-orange-200 text-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-2xl font-bold mb-4">Statistics and Reports</h2>
             <p>
-              Generate reports on team performance, player statistics, and
-              overall participation. Analyze trends and make data-driven
-              decisions.
+              Generate reports on team performance, player statistics, and overall participation.
+              Analyze trends and make data-driven decisions.
             </p>
           </li>
-          <li>
-            <h2>Notifications and Alerts</h2>
+          <li class="bg-gradient-to-br from-green-200 to-teal-200 text-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-2xl font-bold mb-4">Notifications and Alerts</h2>
             <p>
-              Receive notifications about schedule changes, upcoming events, and
-              important announcements in real-time.
+              Receive notifications about schedule changes, upcoming events, and important
+              announcements in real-time.
             </p>
           </li>
-          <li>
-            <h2>Administration Panel</h2>
+          <li class="bg-gradient-to-br from-pink-200 to-purple-200 text-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <h2 class="text-2xl font-bold mb-4">Administration Panel</h2>
             <p>
-              Administrators have access to a dedicated dashboard to manage
-              users, teams, sessions, and system settings.
+              Administrators have access to a dedicated dashboard to manage users, teams, sessions,
+              and system settings.
             </p>
           </li>
         </ul>
       </div>
 
-      <!-- Feedback section -->
-      <div class="feedback-section">
-        <h2>Feedback</h2>
-        <div class="feedback-form">
-          <form action="/submit-feedback" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required />
+      <!-- Feedback Section -->
+      <div class="bg-gradient-to-br from-gray-200 to-gray-300 mt-12 p-10 rounded-lg shadow-md">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">Feedback</h2>
+        <form action="/submit-feedback" method="POST" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+          <label for="name" class="block text-gray-800 font-bold mb-2">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="w-full px-4 py-2 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-400"
+            required
+          />
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
+          <label for="email" class="block text-gray-800 font-bold mb-2">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="w-full px-4 py-2 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-400"
+            required
+          />
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
+          <label for="message" class="block text-gray-800 font-bold mb-2">Message:</label>
+          <textarea
+            id="message"
+            name="message"
+            class="w-full px-4 py-2 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-400"
+            rows="5"
+            required
+          ></textarea>
 
-            <button type="submit">Submit Feedback</button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition w-full"
+          >
+            Submit Feedback
+          </button>
+        </form>
       </div>
     </div>
   </body>

@@ -233,7 +233,6 @@ app.post("/create-session", isAuthenticated, async (req, res) => {
     );
   }
 });
-
 app.post(
   "/join-session",
   isAuthenticated,

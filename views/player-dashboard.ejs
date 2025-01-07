@@ -5,87 +5,85 @@
     <title>Player Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body id="player-dashboard" class="bg-gray-100">
+  <body id="player-dashboard" class="bg-gradient-to-r from-indigo-100 to-blue-200">
     <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 shadow-md">
+    <header class="bg-gradient-to-r from-indigo-400 to-blue-500 text-white py-6 px-10 shadow-xl">
       <div class="flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Player Dashboard</h1>
-        <nav class="flex space-x-6">
-          <a href="/" class="hover:underline">Home</a>
-          <a href="/reports" class="hover:underline">Reports</a>
-          <a href="/change-password" class="hover:underline">Change Password</a>
-          <a href="/logout" class="hover:underline text-red-300">Logout</a>
+        <h1 class="text-4xl font-extrabold tracking-wide">Player Dashboard</h1>
+        <nav class="flex space-x-10 text-lg font-semibold">
+          <a href="/" class="hover:text-indigo-200 transition-colors duration-300">Home</a>
+          <a href="/reports" class="hover:text-indigo-200 transition-colors duration-300">Reports</a>
+          <a href="/change-password" class="hover:text-indigo-200 transition-colors duration-300">Change Password</a>
+          <a href="/logout" class="hover:text-red-400 text-xl transition-colors duration-300">Logout</a>
         </nav>
       </div>
     </header>
 
     <!-- Main Content -->
-   
-    <main class="container mx-auto mt-8 px-6">
-      <h2 class="text-3xl font-bold text-gray-800 mb-6">Welcome, <%= user.name %></h2>
-      <div class="bg-white p-6 rounded-md shadow-lg">
-        <div class="flex justify-end space-x-6 mb-6">
-          <!-- Logout and Change Password Links -->
+    <main class="container mx-auto mt-10 px-8">
+      <h2 class="text-3xl font-semibold text-gray-900 mb-8">Welcome, <%= user.name %></h2>
+      <div class="space-y-8">
+        <!-- Joined Sessions Section -->
+        <div class="bg-white p-8 rounded-xl shadow-2xl hover:shadow-2xl transition-shadow duration-500">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Joined Sessions</h2>
+          <ul class="space-y-6">
+            <% joinedSessions.forEach(session => { %>
+              <li class="bg-gradient-to-r from-teal-300 to-lime-300 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <p class="text-xl font-semibold text-gray-800">Sport: <%= session.sport_name %></p>
+                <p class="text-gray-700">Teams: <%= session.team1 %> vs <%= session.team2 %></p>
+                <p class="text-gray-700">Date: <%= session.date %></p>
+                <p class="text-gray-700">Venue: <%= session.venue %></p>
+                <p class="font-medium text-gray-700">Players:</p>
+                <ul class="list-disc pl-6">
+                  <% session.players.forEach(player => { %>
+                    <li><%= player.name %> <% if (player.id === user.id) { %>(You)<% } %></li>
+                  <% }) %>
+                </ul>
+                <% if (session.cancelled) { %>
+                  <div class="text-red-600 mt-3 italic font-semibold">
+                    Cancelled: <%= session.cancellation_reason %>
+                  </div>
+                <% } %>
+              </li>
+            <% }) %>
+          </ul>
         </div>
 
-        <!-- Joined Sessions Section -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Joined Sessions</h2>
-        <ul class="space-y-4">
-          <% joinedSessions.forEach(session => { %>
-            <li class="bg-gradient-to-r from-green-400 to-orange-500 p-6 rounded-md shadow-lg">
-              <p class="font-bold">Sport: <%= session.sport_name %></p>
-              <p>Teams: <%= session.team1 %> vs <%= session.team2 %></p>
-              <p>Date: <%= session.date %></p>
-              <p>Venue: <%= session.venue %></p>
-              <p>Players:</p>
-              <ul class="list-disc pl-6">
-                <% session.players.forEach(player => { %>
-                  <li><%= player.name %> <% if (player.id === user.id) { %>(You)<% } %></li>
-                <% }) %>
-              </ul>
-              <% if (session.cancelled) { %>
-                <div class="text-red-500 mt-2">
-                  Cancelled: <%= session.cancellation_reason %>
-                </div>
-              <% } %>
-            </li>
-          <% }) %>
-        </ul>
-
         <!-- Available Sessions Section -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Available Sessions</h2>
-        <ul class="space-y-4">
-          <% sessions.forEach(session => { %>
-            <li class="bg-gradient-to-r from-green-400 to-orange-500 p-6 rounded-md shadow-lg">
-              <p class="font-bold">Sport: <%= session.sport_name %></p>
-              <p>Teams: <%= session.team1 %> vs <%= session.team2 %></p>
-              <p>Date: <%= session.date %></p>
-              <p>Venue: <%= session.venue %></p>
-              <p>Players:</p>
-              <ul class="list-disc pl-6">
-                <% session.players.forEach(player => { %>
-                  <li><%= player.name %> <% if (player.id === user.id) { %>(You)<% } %></li>
-                <% }) %>
-              </ul>
-              <% if (session.creator_id === user.id) { %>
-                <div class="italic text-gray-600">(Created by you)</div>
-              <% } %>
-              <% if (session.creator_id !== user.id && !session.cancelled) { %>
-                <form action="/join-session" method="POST" class="mt-2">
-                  <input type="hidden" name="session_id" value="<%= session.id %>" />
-                  <button type="submit" class="text-blue-500 hover:text-blue-700">Join</button>
-                </form>
-              <% } %>
-              <% if (session.cancelled) { %>
-                <div class="text-red-500 mt-2">
-                  Cancelled: <%= session.cancellation_reason %>
-                </div>
-              <% } %>
-            </li>
-          <% }) %>
-        </ul>
+        <div class="bg-white p-8 rounded-xl shadow-2xl hover:shadow-2xl transition-shadow duration-500">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Available Sessions</h2>
+          <ul class="space-y-6">
+            <% sessions.forEach(session => { %>
+              <li class="bg-gradient-to-r from-orange-300 to-pink-300 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <p class="text-xl font-semibold text-gray-800">Sport: <%= session.sport_name %></p>
+                <p class="text-gray-700">Teams: <%= session.team1 %> vs <%= session.team2 %></p>
+                <p class="text-gray-700">Date: <%= session.date %></p>
+                <p class="text-gray-700">Venue: <%= session.venue %></p>
+                <p class="font-medium text-gray-700">Players:</p>
+                <ul class="list-disc pl-6">
+                  <% session.players.forEach(player => { %>
+                    <li><%= player.name %> <% if (player.id === user.id) { %>(You)<% } %></li>
+                  <% }) %>
+                </ul>
+                <% if (session.creator_id === user.id) { %>
+                  <div class="italic text-gray-600">(Created by you)</div>
+                <% } %>
+                <% if (session.creator_id !== user.id && !session.cancelled) { %>
+                  <form action="/join-session" method="POST" class="mt-4">
+                    <input type="hidden" name="session_id" value="<%= session.id %>" />
+                    <button type="submit" class="text-blue-500 hover:text-blue-700 transition-colors duration-300">Join</button>
+                  </form>
+                <% } %>
+                <% if (session.cancelled) { %>
+                  <div class="text-red-500 mt-3 italic font-semibold">
+                    Cancelled: <%= session.cancellation_reason %>
+                  </div>
+                <% } %>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
 
-        <!-- Create New Session Section -->
         <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-8">Create Session</h2>
         <form action="/create-session" method="POST">
           <div class="bg-gradient-to-r from-blue-400 to-purple-500 p-6 rounded-md shadow-lg">
