@@ -1,0 +1,207 @@
+The Sports Scheduler is a web-based application built using Node.js, Express.js, Tailwind CSS, and PostgreSQL to facilitate sports management between administrators and users. The system provides two primary roles: Admin and User, each with distinct functionalities.
+
+Admin Features:
+Sport Creation: The admin has the ability to create new sports.
+Session Management: Admins can create sessions for any sport and also have the option to delete sessions they created.
+Password Management: Admins can change their password for security purposes.
+User Features:
+Session Creation: Users can create new sports sessions.
+Session Participation: Users can join existing sessions created by other users or the admin.
+Password Management: Users can change their passwords.
+Core Functionalities:
+Authentication & Security: Implemented password hashing using bcrypt to ensure secure storage of passwords.
+Duplicate Prevention: The system prevents users from registering with duplicate emails.
+Session Management: Both users and admins can manage sports sessions efficiently.
+Database Schema:
+The project primarily consists of the following tables:
+
+Users – Stores user details (including hashed passwords).
+CreateSport – Holds the list of created sports.
+Sessions – Maintains session details linked to sports.
+SessionPlayers – Tracks users who have joined specific sessions.
+Frontend & Backend Technologies:
+Frontend: Uses EJS (Embedded JavaScript Templates) for rendering dynamic UI components like login, registration, admin dashboard, user dashboard, and password management.
+Backend: Developed using Express.js, handling user authentication, session management, and database interactions via PostgreSQL.
+
+
+
+Modules Implemented in the Capstone Project
+1. Authentication & Security
+The project implements bcrypt.js for password hashing, ensuring secure storage of user credentials. Additionally, express-session is used to manage user sessions, preventing unauthorized access to protected routes.
+
+2. Session Management
+User sessions are handled using express-session, allowing authentication persistence across page reloads. The system ensures proper session expiration and logout mechanisms for security.
+
+3. Database Management
+The pg module is used to interact with a PostgreSQL database, managing tables like users, sports, sessions, and session_players. Queries ensure efficient data storage and retrieval.
+
+4. Role-Based Access Control (RBAC)
+The system differentiates between admin and user roles, granting admins permissions to create/delete sports and sessions, while users can create or join existing sessions.
+
+5. Data Integrity & Constraints
+Duplicate email registrations are prevented by enforcing unique constraints in the database, ensuring a user cannot register with an already existing email.
+
+6. Frontend Rendering
+Using EJS (Embedded JavaScript Templates), the project dynamically renders pages such as login, registration, admin dashboard, and user dashboard, ensuring a responsive UI.
+
+7. Preventing Past Session Joins
+A middleware function checks if a session's date has already passed, preventing users from joining expired sessions.
+
+8. Reports & Analytics
+A reports section provides insights into session popularity and sports engagement trends using SQL queries that aggregate session data.
+
+9. Password Management
+Users can change passwords securely, ensuring old passwords are validated before updating new hashed passwords.
+
+10. Error Handling & Logging
+The application includes error handling mechanisms for database queries and user authentication failures, improving debugging and reliability.
+
+
+Modules Implemented in the Capstone Project
+1. Authentication & Security
+The project implements bcrypt.js for password hashing, ensuring secure storage of user credentials. Additionally, express-session is used to manage user sessions, preventing unauthorized access to protected routes.
+
+2. Session Management
+User sessions are handled using express-session, allowing authentication persistence across page reloads. The system ensures proper session expiration and logout mechanisms for security.
+
+3. Database Management
+The pg module is used to interact with a PostgreSQL database, managing tables like users, sports, sessions, and session_players. Queries ensure efficient data storage and retrieval.
+
+4. Role-Based Access Control (RBAC)
+The system differentiates between admin and user roles, granting admins permissions to create/delete sports and sessions, while users can create or join existing sessions.
+
+5. Data Integrity & Constraints
+Duplicate email registrations are prevented by enforcing unique constraints in the database, ensuring a user cannot register with an already existing email.
+
+6. Frontend Rendering
+Using EJS (Embedded JavaScript Templates), the project dynamically renders pages such as login, registration, admin dashboard, and user dashboard, ensuring a responsive UI.
+
+7. Preventing Past Session Joins
+A middleware function checks if a session's date has already passed, preventing users from joining expired sessions.
+
+8. Reports & Analytics
+A reports section provides insights into session popularity and sports engagement trends using SQL queries that aggregate session data.
+
+9. Password Management
+Users can change passwords securely, ensuring old passwords are validated before updating new hashed passwords.
+
+10. Error Handling & Logging
+The application includes error handling mechanisms for database queries and user authentication failures, improving debugging and reliability.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
